@@ -21,10 +21,8 @@ struct UploadMsg {
     msg: String,
     #[serde(rename = "filename")]
     filename: String,
-    #[serde(rename = "aeph_object_name")]
+    #[serde(rename = "object_name")]
     object_name: String,
-    #[serde(rename = "is_batch_tar_gz")]
-    is_batch_tar_gz: bool,
 }
 
 
@@ -110,7 +108,7 @@ impl WebSocketWrapper {
     pub fn new(url: &str) -> Result<WebSocketWrapper, JsValue> {
         let ws;
         if !url.contains("ws://"){
-            ws = WebSocket::new("ws://10.30.17.1:32464/api/v1/object/upload_stream")?;
+            ws = WebSocket::new("ws://1.1.1.1:10000/api/v1/object/upload_stream")?;
         }else{
             ws = WebSocket::new(url)?;
         }
@@ -141,10 +139,9 @@ impl WebSocketWrapper {
         // let ws = WebSocket::new("ws://192.168.2.20:20080/ws").unwrap();
         let msg = UploadMsg {
             msg_type: 4,
-            msg: "file".into(),
-            filename: "test_obj.5".into(), // 修改为适当的文件名
-            object_name: "test_folder/test_obj.5".into(), // 修改为适当的对象名
-            is_batch_tar_gz:false,
+            msg: "-".into(),
+            filename: "-".into(), // 修改为适当的文件名
+            object_name: "-".into() // 修改为适当的对象名
         };
 
         let data = serde_json::to_vec(&msg).unwrap();
