@@ -1,0 +1,1 @@
+/Users/firshme/Desktop/work/wasm-websocket-upload-big-file/target/wasm32-unknown-unknown/release/wasm_websocket_upload_big_file.wasm: /Users/firshme/Desktop/work/wasm-websocket-upload-big-file/src/lib.rs

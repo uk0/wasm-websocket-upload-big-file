@@ -1,0 +1,48 @@
+[package]
+name = "wasm-websocket-upload-big-file"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[build]
+target = "wasm32-unknown-unknown"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2.89", features = ["serde-serialize"] }
+js-sys = "0.3"
+wasm-sockets = "1.0.0"
+serde_json = "1.0.108"
+serde = { version = "1.0.193", features = ["derive"] }
+console = { version = "0.15.7", features = [] }
+getrandom = { version = "0.2.11", features = ["js"] }
+log = { version = "0.4.20", features = ["std"] }
+sha2 = "0.10.0"
+tar="0.4"
+bytes = "1.5.0"
+wasm-bindgen-file-reader = "1"
+wasm-logger = "0.2.0"
+rand = "0.8.5"
+thread_local = "1.1.7"
+wasm-bindgen-futures = "0.4.39"
+hex = "0.4.3"
+futures-channel = { version = "0.3.29", features = [] }
+url = "2.5.0"
+lazy_static = "1.4.0"
+[dependencies.web-sys]
+version = "0.3.22"
+features = [
+    'Window', 'Document', 'HtmlElement',
+    "BinaryType",
+    "Blob",
+    "File",
+    "ErrorEvent",
+    "FileReader",
+    "MessageEvent",
+    "FileReaderSync",
+    "ProgressEvent",
+    "WebSocket",
+    "console",
+]

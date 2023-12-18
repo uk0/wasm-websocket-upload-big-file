@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Rust WASM File Upload</title>
+    <style>
+        label {
+            padding-right: 10px;
+            font-size: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+<input type="file" id="filepicker" />  <br>
+<textarea
+        id="output_textarea"
+        class="code"
+        rows="5"
+        cols="100"
+        readonly
+></textarea>  <br>
+
+<button onclick="send()">SendFile</button> <br>
+<button onclick="md5()">MD5</button> <br>
+    <script>
+        let file = document.getElementById("filepicker").files[0] || null;
+        document.getElementById("filepicker").addEventListener(
+        "change",
+        function() {
+        file = this.files[0];
+    },
+        false
+        );
+        let myWorker = new Worker("worker.js");
+        function send() {
+            myWorker.postMessage({file: file,action:"send" });
+            myWorker.onmessage = function (evt) {
+                console.log('master reveived msg: ', evt.data)
+            }
+        }
+
+    function md5() {
+        let outta = document.getElementById("output_textarea");
+        myWorker.postMessage({ file: file,action:"md5" });
+        myWorker.onmessage = function(e) {
+            console.log("Got message from worker: ", e.data);
+            outta.value = e.data;
+        };
+    }
+</script>
+</body>
+</html>
